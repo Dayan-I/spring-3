@@ -4,6 +4,10 @@ import ru.vagapov.spring.dto.User;
 
 import java.util.List;
 
+/**
+ * Сервисный слой, реализует методы ДАО слоя
+ * Работает с UserDTO
+ */
 public interface UserService {
 
     void createUser(User user);

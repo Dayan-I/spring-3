@@ -14,10 +14,16 @@ public class Main {
         UserService userService = ctx.getBean(UserService.class);
 
         //Здесь можете протестировать создание своих пользователей
-        userService.createUser(new User());
-        userService.createUser(new User());
-        userService.createUser(new User());
-        userService.createUser(new User());
+        User user1 = new User();
+        user1.setLastName("fff");
+        user1.setUserName("f=aaa");
+        user1.setAge(7);
+        user1.setEmail("gfnjfnd");
+        user1.setPassword("fff");
+        userService.createUser(user1);
+        userService.createUser(new User(2L,"bob", "dylan", "gmail", "pipi", 2));
+        userService.createUser(new User(3L,"bob", "dylan", "gmail", "pipi", 2));
+        userService.createUser(new User(4L,"bob", "dylan", "gmail", "pipi", 2));
 
         List<User> users = userService.findAll();
         for (User user : users) {

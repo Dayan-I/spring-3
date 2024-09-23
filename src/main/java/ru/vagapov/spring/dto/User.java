@@ -3,22 +3,45 @@ package ru.vagapov.spring.dto;
 import java.util.Objects;
 
 /**
- * Это называется Джава-дока, документация разработчика для лучшей читаймости кода
- * Удалите эти надписи и над этим классом и над каждым полем поставьте такие доки с обьяснением для чего класс и поле
- * Таким же образом добавьте доку во все интерфейсы
+ * ДТО класс для сущности юзера, именно его отдаем по запросам
+ * пользователей и в userService
  */
 public class User {
-
+    /**
+     * уникальный айди
+     */
     private Long id;
+    /**
+     * имя
+     */
     private String userName;
+    /**
+     * фамилия
+     */
     private String lastName;
+    /**
+     * эклектронная почта
+     */
     private String email;
+    /**
+     * пароль от сервиса
+     */
     private String password;
+    /**
+     * возраст
+     */
     private Integer age;
 
     public User() {}
 
-    public User(Long id, String userName, String lastName, String email, String password, Integer age) {}
+    public User(Long id, String userName, String lastName, String email, String password, Integer age) {
+        this.id = id;
+        this.userName = userName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.age = age;
+    }
 
     public Long getId() {
         return id;

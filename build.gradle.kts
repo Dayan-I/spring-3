@@ -26,7 +26,9 @@ dependencies {
 //    compileOnly("javax.servlet:javax.servlet-api:4.0.1")
 
     testImplementation("org.springframework:spring-test:5.3.14")
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(platform("org.junit:junit-bom:5.11.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
