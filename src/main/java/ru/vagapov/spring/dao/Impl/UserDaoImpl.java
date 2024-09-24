@@ -4,14 +4,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.entity.UserEntity;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -23,51 +18,53 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void createUser(UserEntity user) {
-        entityManager.merge(user);
+        entityManager.persist(user);
     }
 
     @Transactional
     @Override
     public void updateUser(UserEntity user, Long id) {
-        entityManager.setProperty("id", id);
+        String jpql = "update UserEntity u set u.id = :id";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("id", id);
     }
 
     @Transactional
     @Override
     public void deleteUser(Long id) {
-        entityManager.detach(entityManager.getReference(UserEntity.class, id));
+        entityManager.remove(entityManager.find(UserEntity.class, id));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public UserEntity findById(Long id) {
         return entityManager.find(UserEntity.class, id);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public UserEntity findUserByUserName(String userName) {
         String jpql = "select u from UserEntity u where u.userName = :userName";
         Query query = entityManager.createQuery(jpql);
         query.setParameter("userName", userName);
         return (UserEntity) query.getSingleResult();
-        // можно сделать через критерию:
-       /* CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-        Root<UserEntity> root = cq.from(UserEntity.class);
-        cq.select(root);
-        cq.where(cb.equal(root.get("userName"), userName));
-        TypedQuery<UserEntity> query = entityManager.createQuery(cq);
-        return query.getSingleResult();*/
+//         можно сделать через критерию:
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
+//        Root<UserEntity> root = cq.from(UserEntity.class);
+//        cq.select(root);
+//        cq.where(cb.equal(root.get("userName"), userName));
+//        TypedQuery<UserEntity> query = entityManager.createQuery(cq);
+//        return query.getSingleResult();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<UserEntity> findAll() {
         return entityManager.createQuery("from UserEntity").getResultList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
     public List<UserEntity> findAllUsersByLastName(String lastName) {
         String jpql = "select u from UserEntity u where u.lastName = :lastName";

@@ -20,7 +20,7 @@ public class User {
      */
     private String lastName;
     /**
-     * эклектронная почта
+     * электронная почта
      */
     private String email;
     /**

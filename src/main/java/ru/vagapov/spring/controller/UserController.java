@@ -15,16 +15,10 @@ import java.util.List;
 
 /**
  * Класс-контроллер, отвечает на запросы пользователей
- * связывает БД и конечного пользователя
- * через userService
  */
 @Controller
 public class UserController {
 
-    /**
-     * Поле для реализации взаимодействия с БД
-     * userService
-     */
     @Autowired
     private UserService userService;
 

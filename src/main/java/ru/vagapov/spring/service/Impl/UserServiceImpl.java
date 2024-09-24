@@ -1,5 +1,6 @@
 package ru.vagapov.spring.service.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vagapov.spring.MappingUtils.MappingUtils;
 import ru.vagapov.spring.dao.UserDao;
@@ -14,20 +15,19 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
-    private final MappingUtils mappingUtils = new MappingUtils();
+
+    @Autowired
+    private MappingUtils mappingUtils;
 
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
     @Override
-
-
     public void createUser(User user) {
         UserEntity userEntity = mappingUtils.userDtoToUserEntity(user);
         userDao.createUser(userEntity);
     }
-
 
     @Override
     public void updateUser(User user, Long id) {
@@ -35,43 +35,38 @@ public class UserServiceImpl implements UserService {
         userDao.updateUser(userEntity, id);
     }
 
-
     @Override
     public void deleteUser(Long id) {
         userDao.deleteUser(id);
     }
-
 
     @Override
     public User findById(Long id) {
         return mappingUtils.userEntityToUserDto(userDao.findById(id));
     }
 
-
     @Override
     public User findUserByUserName(String userName) {
         return mappingUtils.userEntityToUserDto(userDao.findUserByUserName(userName));
     }
 
-
     @Override
     public List<User> findAll() {
-        List<UserEntity> user_list= userDao.findAll();
-        List<User> users = new ArrayList<User>();
-        for (UserEntity user : user_list) {
-            users.add(mappingUtils.userEntityToUserDto(user));
+        List<UserEntity> usersEntities = userDao.findAll();
+        List<User> usersDto = new ArrayList<User>();
+        for (UserEntity user : usersEntities) {
+            usersDto.add(mappingUtils.userEntityToUserDto(user));
         }
-        return users;
+        return usersDto;
     }
-
 
     @Override
     public List<User> findAllUsersByLastName(String lastName) {
-        List<UserEntity> user_list= userDao.findAllUsersByLastName(lastName);
-        List<User> users = new ArrayList<User>();
-        for (UserEntity user : user_list) {
-            users.add(mappingUtils.userEntityToUserDto(user));
+        List<UserEntity> userEntities = userDao.findAllUsersByLastName(lastName);
+        List<User> usersDto = new ArrayList<User>();
+        for (UserEntity user : userEntities) {
+            usersDto.add(mappingUtils.userEntityToUserDto(user));
         }
-        return users;
+        return usersDto;
     }
 }

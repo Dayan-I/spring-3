@@ -1,12 +1,15 @@
 package ru.vagapov.spring.MappingUtils;
 
+import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 
 /**
  * Маппер для превращения UserEntity в UserDto и наоборот
  */
+@Component
 public class MappingUtils {
+
     public User userEntityToUserDto(UserEntity userEntity) {
         User user = new User();
         user.setAge(userEntity.getAge());
