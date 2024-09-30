@@ -12,6 +12,7 @@ public class MappingUtils {
 
     public User userEntityToUserDto(UserEntity userEntity) {
         User user = new User();
+        user.setId(userEntity.getId());
         user.setAge(userEntity.getAge());
         user.setUserName(userEntity.getUserName());
         user.setPassword(userEntity.getPassword());
@@ -22,7 +23,6 @@ public class MappingUtils {
 
     public UserEntity userDtoToUserEntity(User user) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setId(user.getId());
         userEntity.setAge(user.getAge());
         userEntity.setUserName(user.getUserName());
         userEntity.setPassword(user.getPassword());

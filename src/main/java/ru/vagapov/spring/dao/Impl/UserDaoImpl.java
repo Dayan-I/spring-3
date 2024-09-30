@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.entity.UserEntity;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -24,9 +25,13 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     @Override
     public void updateUser(UserEntity user, Long id) {
-        String jpql = "update UserEntity u set u.id = :id";
-        Query query = entityManager.createQuery(jpql);
-        query.setParameter("id", id);
+        UserEntity userEntity = entityManager.find(UserEntity.class, id);
+        userEntity.setUserName(user.getUserName());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setEmail(user.getEmail());
+        userEntity.setLastName(user.getLastName());
+        userEntity.setAge(user.getAge());
+        entityManager.merge(userEntity);
     }
 
     @Transactional

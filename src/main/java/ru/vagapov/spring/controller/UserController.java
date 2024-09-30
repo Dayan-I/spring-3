@@ -3,14 +3,11 @@ package ru.vagapov.spring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.service.UserService;
-
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -24,7 +21,6 @@ public class UserController {
 
     @GetMapping("/")
     public String home(Model model) {
-        userService.createUser(null);
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "index";
@@ -43,23 +39,30 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public String deleteUser(@ModelAttribute("user") Long id) {
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String editUser(@ModelAttribute("user") Long id) {
-        return "redirect:/{id}";
+    @RequestMapping(value = "/{id}/edituser", method = RequestMethod.GET)
+    public String editUser(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("user", userService.findById(id));
+        return "edit";
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public String editUserBy(@ModelAttribute("user") User user, Long id) {
         userService.updateUser(user, id);
         return "redirect:/";
     }
-    //добавьте url на удаление = /delete который принимает id пользака, после перебрасывает на основную страницу
-    //добавьте url на редактирование = /edit который принимает id пользака и перебрасывает на страницу с редактированием (новая страница)
-    //добавьте url на постредактирование = /{id} который принимает id пользака в пути и ДТО отредактированого пользователя, после у нас в программе происходит update и перебрасывает на основную страницу
+
+    @RequestMapping(value = "/search")
+    public String findUserByNameAndSurname(Model model, @RequestParam(name = "username") String username) {
+        List<User> users = userService.findAll();
+        users.removeIf(user -> !user.getUserName().toLowerCase().contains(username.toLowerCase()) && !user.getLastName().toLowerCase().contains(username.toLowerCase()));
+        model.addAttribute("users", users);
+        return "users";
+    }
+
 }

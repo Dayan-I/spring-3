@@ -1,12 +1,12 @@
 package ru.vagapov.spring.service;
 
 import ru.vagapov.spring.dto.User;
-
 import java.util.List;
 
 /**
  * Сервисный слой, реализует методы DAO слоя
  */
+
 public interface UserService {
     /**
      * Создание нового юзера

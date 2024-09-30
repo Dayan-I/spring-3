@@ -21,9 +21,9 @@ dependencies {
     implementation("org.hibernate:hibernate-core:5.6.3.Final")
     implementation("org.hibernate:hibernate-entitymanager:5.6.3.Final")
     implementation("org.postgresql:postgresql:42.3.1")
-//    implementation("org.thymeleaf:thymeleaf-spring5:3.0.14.RELEASE")
-//
-//    compileOnly("javax.servlet:javax.servlet-api:4.0.1")
+    implementation("org.thymeleaf:thymeleaf-spring5:3.0.14.RELEASE")
+
+    compileOnly("javax.servlet:javax.servlet-api:4.0.1")
 
     testImplementation("org.springframework:spring-test:5.3.14")
     testImplementation(platform("org.junit:junit-bom:5.11.0"))

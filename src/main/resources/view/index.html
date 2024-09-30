@@ -1,54 +1,50 @@
+
 <!DOCTYPE html>
-<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Cars</title>-->
-<!--</head>-->
-<!--<body>-->
-
-
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Таблица</title>
-    <style type="text/css">
-        TABLE {
-            width: 300px; /* Ширина таблицы */
-            border-collapse: collapse; /* Убираем двойные линии между ячейками */
-        }
-        TD, TH {
-            padding: 3px; /* Поля вокруг содержимого таблицы */
-            border: 1px solid black; /* Параметры рамки */
-        }
-        TH {
-            background: #b0e0e6; /* Цвет фона */
-        }
-    </style>
-</head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=guBkf1jdI9-O0z5QPTeQ7EL-WP7Exu7Lz1-luhGRwNO83qUnSw7A5mbfqRUQ-Me052bVF_XiRceDsYUIYMuRlNa5doO18eyHYS0iyZurZAHOtRkMHY2dEO6DhnmBlZ-T9frWFRuwkDjVzxpnjKk2JOcNN4ex5Ea_FqZSVTm7R4_Kp2OVH5IgMbdcllrdBb4I6BVaRvKyzCOckJx8Z3Wvy6TCyOVwmFC8RkVv4enoaq1riK2_uWwKQDoj3wH3_nZ-ArQD8BGXUh6QwA8aS1C_P5T4gp3_Mru-eCDmYHJSeOvosjNUe5--0WJVTr2XyZ8SRJRL2WFwbwJ5iGmDtDWpaJmokwvNGg1mX4Uks2OO8nLPVKsOxLmUt4aaC0y3HTIsUqRkhtOi3SGEWZ9_QES8GhY59_l_kCb5TSCuqSbhpBf5Zn1AjGNUyC1b2U53Ic3rK9shmPNp2BhqMW8BlL7BsXgx-5s-ApXGztQbhjBUPkjmbkGmIZJKDQgh--Ncfu0RSjg5Jia9dKufLmJB_Q17tg0jzV6kaCHV7ZcbzDo4LXhxP_4aN1zytdO2E9tQBA363cQ2CcIVEQNPMJq2CdKH2CmSj45A77IH5B9KMh4yivZ0_bphafFVApbHo_-Tuu2AhSY6NChcW3YBKIEHHdCFNDVFK0nvYORadwfFDG-wnIT-Ivd-aI7-V7yu04iDI2ZDccapgP2MoIfXAm79vOP1zRWtjJNAG1b1kvxwvzdFQ2JuYY8fFyfpB8apufuCztvz-xmyVU5Kmwg8rapUP5CrndRolOTan-13ZfLjBD2WF_7ijTX13opD4LD_fnriyOgAFWULBKauj3rXtfk4CFzwJeFiwVIduWcxyVsvZIglJm1Vdc27xEozSX-3_IDfyZA5CrLDp4bD6Ev7LZwWktRTHoa4RpRmgboAF0kNRd6D23sTBb3iWWMfY2eSvAxpSEK2vF2DheC-k_LzUn_KplR_6DbWSzBqNb0BhRC6qxAiPofmpAqmAuXfRzpG9J6Z4BHQvscUcB1qYDBQdc0_8uFkbAbD6QCN9Ol2bM-wA0OXGNxCINxvrsDo37Z1zuFH7GGDc3gwSOvGSSxHcAYELoqAtzbCJuz7lHpl0CV-e4NWKPcYXWXrpY4TJPA-LQHh49XaNsEiQZ0i_ubIaRKzNTsCA1OPAL8_vioG-5b5zgOy13qyeQivi90N2hW9jTV0vBQdf0IW91xIj8tJSivBZr72cQ" charset="UTF-8"></script></head>
 <body>
+<div align="center">
+    <h2>Users</h2>
+    <h3>Search by Name and Lastname</h3>
+    <form method="get" action="/search" >
+        <input type="text" th:name="username" th:value="${username}"/>
+        <input type="submit" value="Search"></input>
+    </form>
+    <h3><a href="/new">New User</a></h3>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>LastName</th>
+            <th>E-mail</th>
+            <th>Age</th>
+        </tr>
 
-<table>
-    <thead>
-    <tr>
-        <th> Id </th>
-        <th> UserName </th>
-        <th> LastName </th>
-        <th> Email </th>
-        <th> Password </th>
-        <th> Age </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td><span th:text="${user.getId()}"> Id </span></td>
-        <td><span th:text="${user.getUserName()}"> UserName </span></td>
-        <td><span th:text="${user.getLastName()}"> LastName </span></td>
-        <td><span th:text="${user.getEmail()}"> Email </span></td>
-        <td><span th:text="${user.getPassword()}"> Password </span></td>
-        <td><span th:text="${user.getAge()}"> Age </span></td>
-    </tr>
-    </tbody>
-</table>
+        <tr th:if="${users.isEmpty()}">
+            <td colspan="4"> No Users Available </td>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td><span th:text="${user.id}"> Id </span></td>
+            <td><span th:text="${user.getUserName()}"> Name </span></td>
+            <td><span th:text="${user.getLastName()}"> LastName </span></td>
+            <td><span th:text="${user.getEmail()}"> Email </span></td>
+            <td><span th:text="${user.getAge()}"> Age </span></td>
+            <td>
+                <form th:action="@{/{id}/edituser(id=${user.id})}" th:method="get" >
+                    <input type="hidden" name="id" th:value="${user.id}" />
+                    <input type="submit" value="Edit" class="btn btn-danger" />
+                </form>
+                <form th:action="@{/{id}/delete(id=${user.id})}" th:method="delete">
+                    <input type="hidden" name="id" th:value="${user.id}" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=UA2so3fB6_6XdMX5vCBgpze-8qwgPXCfjPGruj4eg01kqSEiRNBNgv-xkxmoUU6UQK4gb8SepdV0jcsog_ovnbnYntA44F5m9U9dwF9nb3nplWU0DsKiKXyMsaf35k3b2vXtwiWgSwV3D-er2DQFvumYkKB54lyRgDebfMhy-MKef2ULd4DmC-W2oVncRs2xz7JQATapT77lJ44fgTAhwqtwv1JpZWKSruugHwxecf-WaU793cD0rjDnCy0VIrGgpLusiWbaSk2wwubZZ8__OpXweQtwm90R-ZMjr6L9k5Y2nSUv3kGixQVxTCDUyrZnoWC2Qejk3wuBVfn3EGXiZjHlIwujBeyvbPR2lByIZ1GRAaRpemUKUo0VNjLCGNGUAHthyBWGDCxVlUwd9f1Qit21eiTxiqoHQcUrvWhFal6VnWnEXIb2SCMJtLsQNprmDKckjl9gn5TMoIy-DFMrGu1mM1fNX5nhJAz5POP8pkjegolHlshoPn-KDUx_Xq5KimOW5-loNIzoq011Z1oQUY6sbTAYTIK5J4zpeTcSE6ohpYnSstelsiATYmvKdTJIgp4cZ4LGF0xkOvYUg3MTaEXJmDG3Kaa4p8p3HUaf9xjPTCLBcGAhvsiqHHLyCUnx1Q1efrOwGsQdgHojiJz4V5uwzE-606D7TGfLFkM_Wbo1KbvaAp4XLlW3ynTg22CMbDtswB3eFlBL7YePhlgfDF6efIRIcXJGwgt4quO8EkO7OEpxRFZn2rdQdmFr7vPFOKvs0s5nZmQhke8QV7G7CAK1OufDvzBVYHVzSuwerydRK2DIgCpvx2FkTclpT7LDeNRkfhr0zUyX3z9IwrdlNpEc7UqmX2ZCEhxkt_sa7wbfh_cXxKSGckSNs5kGQoHb4pXS4RH-Iv2Qa_lKZos6cDFroGLtrtXGqMl5FGYExAZ4PJsXNdOvGpgKOYV3gl-t-rRx6jSBpnVAeB142hv2K2XejMEC8BkfctIIJGjbaPJWwZIp4PAeOPs2FQ1qdrOhXr5v2fOibDTI7ilE0hevVtuaI_N66ZYHshdMaZfoE_jedHsOivF2MxAP-V-PdOt4nv0GdHinCgFRQMMVZxEZiCo2REqhpKUCLokAQRC9EEOkuwA69cCQp9rtN8Dkp453eZ7dg2MZkv8ZDHBEXIW2l3UL_g5eRbdwloXzGnhmHbHcuhDGvqglWedAMr5qzucgS4LfIPEIwdTffAVJHacpdw" charset="UTF-8"></script></head>
+<body>
+<div align="center">
+    <h2>Edit User</h2>
+    <form action="#" th:action="@{/edit}" th:object="${user}" th:method="PATCH">
+        <table border="1">
+            <tr>
+                <td><input type="hidden" th:field="*{id}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="Name" /></td>
+                <td><input type="text" th:field="*{userName}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="LastName" /></td>
+                <td><input type="text" th:field="*{lastName}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="Email" /></td>
+                <td><input type="text" th:field="*{email}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="Password" /></td>
+                <td><input type="text" th:field="*{password}" /></td>
+            </tr>
+            <tr>
+                <td><label th:text="Age" /></td>
+                <td><input type="text" th:field="*{age}" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Edit" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

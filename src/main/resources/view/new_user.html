@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New User</title>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=_3pC9Tw0b4E761TypoEboV54CrFRW6MewAt7wc4uPtiKlVnuzAY3sBwIt4SJOfak77WgH_udGKTGxoAm-ffxFvoyrx8Nh7Kwi97iJpakQP0AIa8hv5gUPm86v6s5Ih0ZAuYNTfJn7F96_xMrdUKTVCFoRb6NJfV8E7CzvNsEtX_VCGTX0Oz2d9fGAYsbv-B5rLb4q1ErgcCSan16nfPV3HQV_ZE8iNBW8ks_Z3U-a3ps6PQBw0CtGyW9XNKToV9rCj1neHhpla-mc5fgSbV7PB-k4zY_LXpdmWmQGnwp5hjFqA7fM21IlmKqqLvoUsMYJrx0wvhuBi6dj6seJ7EgqXUqqs385_LVsdlT0zT9fiZNf2A0YVhPvDWjLDyVssl06en-ZQo2JUfXXeLtRGbbGgtJSj_XpACpJ1ZARG0ppiIJI1P4OQvp1yx2O7ORipTYNVvvjK_6qkpE6M-Sm6DIfv71a9EOiPq36UVQmyR22zPo7OhinlxbwRQRXUV-90hdyDJ6eJ8wxj2i4BcFBEuwYwRvuVDnjdcwzcqSvz8xrVj0OfOdKBKCr-pI17QvNuftqXH2ZuNGIQDAM4w6_UUzagHziO7fUOqh6WLAROuGhTbgjJLn6DVxGe_Ch_TQ34od33aLIh2XzPHTxzfuRI9aGm6LZdwxhe0KQmqFF3oM6XgWjMe9nItrGtzE9KL8jb16A8ZaH9jR6kdBCq9MJwr93PFsYLE0pA4nmrv5Jx45voqfdQ4YCfEZ5FU-fcowOuZYj0od2O5QVMRz8CSMbHtjvUebQ31EjwR-7ElrfqC9v64F3E1vX-IMR3wfK5II96WC73oMLQKRVaR9HrB7BNTNJySyGC-YJF-TU1ZvixWIDn9HuSpRKqYXSlB37PscMudTh4HNto6cZhB0FRU54HKxbc4zUVBYFHo9juO_Cou6UiEKBU2yxZnf58zOdpVn2jBaj4W_XRa9kkUvXAVkOqkI_Fa2zGI1XkgZ0lOqRjp6YG0evVuh6IcLRUK37p9Jw31sc2jW8e7EfBwUJHFY0x-fnykU2iJDVn465-GO082Ep5U8A3DM6uzjGzVv1gAvCmo34bxFdTqi5W7myw8MiKBovvtHmSwI0wDNQNdkQqxiTabzhN8GDJR2gr48eVO48jcfynk-xuCVPGTm3_8uWt9YFa-u1nQR2m4cmxIk8yscRqIjezpLKvQm3B-w6KDyRYAu1W0trs8PUt9aBdx9tDdxKCJ0YfVBIQ8-bCUbBTSrxBk" charset="UTF-8"></script></head>
+<body>
+<div align="center">
+  <h2>New User</h2>
+  <form action="#" th:action="@{/save}" th:object="${user}" method="post">
+    <table border="1">
+      <tr>
+        <td><label th:text="Name" /></td>
+
+        <td><input type="text" th:field="*{userName}" /></td>
+      </tr>
+      <tr>
+        <td><label th:text="LastName" /></td>
+        <td><input type="text" th:field="*{lastName}" /></td>
+      </tr>
+      <tr>
+        <td><label th:text="Email" /></td>
+        <td><input type="text" th:field="*{email}" /></td>
+      </tr>
+      <tr>
+        <td><label th:text="Password" /></td>
+        <td><input type="text" th:field="*{password}" /></td>
+      </tr>
+      <tr>
+        <td><label th:text="Age" /></td>
+        <td><input type="text" th:field="*{age}" /></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="Save" /></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>
