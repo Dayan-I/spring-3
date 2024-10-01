@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.service.UserService;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
@@ -20,9 +21,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, @RequestParam(name = "username", required = false) String username) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
+        if (username != null) {
+            users.removeIf(user -> !user.getUserName().toLowerCase().contains(username.toLowerCase()) && !user.getLastName().toLowerCase().contains(username.toLowerCase()));
+            model.addAttribute("users", users);
+        }
         return "index";
     }
 
@@ -39,7 +44,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/";
@@ -51,18 +56,22 @@ public class UserController {
         return "edit";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = RequestMethod.PATCH)
     public String editUserBy(@ModelAttribute("user") User user, Long id) {
         userService.updateUser(user, id);
         return "redirect:/";
     }
+
 
     @RequestMapping(value = "/search")
     public String findUserByNameAndSurname(Model model, @RequestParam(name = "username") String username) {
         List<User> users = userService.findAll();
         users.removeIf(user -> !user.getUserName().toLowerCase().contains(username.toLowerCase()) && !user.getLastName().toLowerCase().contains(username.toLowerCase()));
         model.addAttribute("users", users);
-        return "users";
+        if (users.isEmpty()) {
+            return "redirect:/";
+        } else {
+            return "users";
+        }
     }
-
 }
