@@ -77,5 +77,15 @@ public class UserDaoImpl implements UserDao {
         query.setParameter("lastName", lastName);
         return query.getResultList();
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<UserEntity> findAllUsersByPartOfNameOrLastName(String partOfName) {
+        String jpql = "select u from UserEntity u where upper (u.lastName) like concat('%',upper(:partOfName),'%')  or upper(u.userName) like concat('%',(:partOfName),'%')";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("partOfName", partOfName);
+        return query.getResultList();
+    }
+
 }
 

@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         List<UserEntity> usersEntities = userDao.findAll();
-        List<User> usersDto = new ArrayList<User>();
+        List<User> usersDto = new ArrayList<>();
         for (UserEntity user : usersEntities) {
             usersDto.add(mappingUtils.userEntityToUserDto(user));
         }
@@ -63,10 +63,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUsersByLastName(String lastName) {
         List<UserEntity> userEntities = userDao.findAllUsersByLastName(lastName);
-        List<User> usersDto = new ArrayList<User>();
+        List<User> usersDto = new ArrayList<>();
         for (UserEntity user : userEntities) {
             usersDto.add(mappingUtils.userEntityToUserDto(user));
         }
         return usersDto;
     }
+
+    @Override
+    public List<User> findAllUsersByPartOfNameOrLastName(String partOfName) {
+        List<UserEntity> userEntities = userDao.findAllUsersByPartOfNameOrLastName(partOfName);
+        List<User> usersDto = new ArrayList<>();
+        for(UserEntity user : userEntities) {
+            usersDto.add(mappingUtils.userEntityToUserDto(user));
+        }
+        return usersDto;
+    }
+
 }

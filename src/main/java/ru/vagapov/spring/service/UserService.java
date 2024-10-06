@@ -1,6 +1,8 @@
 package ru.vagapov.spring.service;
 
 import ru.vagapov.spring.dto.User;
+import ru.vagapov.spring.entity.UserEntity;
+
 import java.util.List;
 
 /**
@@ -59,4 +61,6 @@ public interface UserService {
      * @return List<User>  список всех пользователей с искомой фамилией
      */
     List<User> findAllUsersByLastName(String lastName);
+
+    List<User> findAllUsersByPartOfNameOrLastName(String partOfName);
 }

@@ -22,10 +22,9 @@ public class UserController {
 
     @GetMapping("/")
     public String home(Model model, @RequestParam(name = "username", required = false) String username) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+
         if (username != null) {
-            users.removeIf(user -> !user.getUserName().toLowerCase().contains(username.toLowerCase()) && !user.getLastName().toLowerCase().contains(username.toLowerCase()));
+            List<User> users = userService.findAllUsersByPartOfNameOrLastName(username);
             model.addAttribute("users", users);
         }
         return "index";
