@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.service.UserService;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
@@ -22,14 +21,16 @@ public class UserController {
 
     @GetMapping("/")
     public String home(Model model, @RequestParam(name = "username", required = false) String username) {
-
         if (username != null) {
             List<User> users = userService.findAllUsersByPartOfNameOrLastName(username);
             model.addAttribute("users", users);
+            return "index";
+        } else {
+            List<User> users = userService.findAll();
+            model.addAttribute("users", users);
+            return "index";
         }
-        return "index";
     }
-
     @RequestMapping("/new")
     public String newUserForm(Model model) {
         UserEntity user = new UserEntity();

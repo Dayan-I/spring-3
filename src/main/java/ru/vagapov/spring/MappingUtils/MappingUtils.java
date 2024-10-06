@@ -4,6 +4,9 @@ import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Маппер для превращения UserEntity в UserDto и наоборот
  */
@@ -29,5 +32,13 @@ public class MappingUtils {
         userEntity.setEmail(user.getEmail());
         userEntity.setLastName(user.getLastName());
         return userEntity;
+    }
+
+    public List<User> listOfUserEntityToListOfUserDto(List<UserEntity> userEntityList) {
+        List<User> listOfUserDto = new ArrayList<>();
+        for (UserEntity userEntity : userEntityList) {
+            listOfUserDto.add(userEntityToUserDto(userEntity));
+        }
+        return listOfUserDto;
     }
 }
