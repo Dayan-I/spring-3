@@ -52,16 +52,15 @@ public class UserDaoImpl implements UserDao {
         Query query = entityManager.createQuery(jpql);
         query.setParameter("userName", userName);
         return (UserEntity) query.getSingleResult();
-/*
-         можно сделать через критерию:
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-        Root<UserEntity> root = cq.from(UserEntity.class);
-        cq.select(root);
-        cq.where(cb.equal(root.get("userName"), userName));
-        TypedQuery<UserEntity> query = entityManager.createQuery(cq);
-        return query.getSingleResult();
-*/
+//         можно сделать через критерию:
+//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+//        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
+//        Root<UserEntity> root = cq.from(UserEntity.class);
+//        cq.select(root);
+//        cq.where(cb.equal(root.get("userName"), userName));
+//        TypedQuery<UserEntity> query = entityManager.createQuery(cq);
+//        return query.getSingleResult();
+
     }
 
     @Transactional(readOnly = true)

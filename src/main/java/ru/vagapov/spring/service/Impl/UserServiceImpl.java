@@ -1,6 +1,5 @@
 package ru.vagapov.spring.service.Impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.dto.User;
@@ -9,14 +8,14 @@ import ru.vagapov.spring.mappingUtils.MappingUtils;
 import ru.vagapov.spring.service.UserService;
 import java.util.List;
 
+
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
-
     private final MappingUtils mappingUtils;
 
-    @Autowired
+
     public UserServiceImpl(UserDao userDao, MappingUtils mappingUtils) {
         this.userDao = userDao;
         this.mappingUtils = mappingUtils;

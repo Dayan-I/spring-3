@@ -3,7 +3,6 @@ package ru.vagapov.spring.mappingUtils;
 import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
-
 import java.util.ArrayList;
 import java.util.List;
 
