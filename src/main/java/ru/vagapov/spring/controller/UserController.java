@@ -49,9 +49,9 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/{id}/edituser", method = RequestMethod.GET)
-    public String editUser(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.findById(id));
+    @RequestMapping(value = "/edituser", method = RequestMethod.GET)
+    public String editUser(Model model, @RequestParam(name = "id") String id) {
+        model.addAttribute("user", userService.findById(Long.parseLong(id)));
         return "edit";
     }
 

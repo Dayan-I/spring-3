@@ -34,7 +34,7 @@
             <td><span th:text="${user.getEmail()}"> Email </span></td>
             <td><span th:text="${user.getAge()}"> Age </span></td>
             <td>
-                <form th:action="@{/{id}/edituser(id=${user.id})}" th:method="get" >
+                <form th:action="@{/edituser}" th:method="get" >
                     <input type="hidden" name="id" th:value="${user.id}" />
                     <input type="submit" value="Edit" class="btn btn-danger" />
                 </form>
@@ -45,6 +45,7 @@
             </td>
         </tr>
     </table>
+    <h3><a href="/">Homepage</a></h3>
 </div>
 </body>
 </html>

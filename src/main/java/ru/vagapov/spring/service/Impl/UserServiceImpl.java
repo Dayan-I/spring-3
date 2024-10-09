@@ -2,10 +2,10 @@ package ru.vagapov.spring.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.vagapov.spring.MappingUtils.MappingUtils;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
+import ru.vagapov.spring.mappingUtils.MappingUtils;
 import ru.vagapov.spring.service.UserService;
 import java.util.List;
 
@@ -14,11 +14,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
-    @Autowired
-    private MappingUtils mappingUtils;
+    private final MappingUtils mappingUtils;
 
-    public UserServiceImpl(UserDao userDao) {
+    @Autowired
+    public UserServiceImpl(UserDao userDao, MappingUtils mappingUtils) {
         this.userDao = userDao;
+        this.mappingUtils = mappingUtils;
     }
 
     @Override

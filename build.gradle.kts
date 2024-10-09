@@ -24,8 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.postgresql:postgresql")
-    compileOnly("javax.servlet:javax.servlet-api:4.0.1")
-
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.test {

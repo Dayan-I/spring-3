@@ -8,27 +8,27 @@ import java.util.Objects;
  */
 public class User {
     /**
-     * уникальный айди
+     * Уникальный айди
      */
     private Long id;
     /**
-     * имя
+     * Имя
      */
     private String userName;
     /**
-     * фамилия
+     * Фамилия
      */
     private String lastName;
     /**
-     * электронная почта
+     * Электронная почта
      */
     private String email;
     /**
-     * пароль от сервиса
+     * Пароль от сервиса
      */
     private String password;
     /**
-     * возраст
+     * Возраст
      */
     private Integer age;
 

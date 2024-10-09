@@ -10,9 +10,7 @@
     <h2>Edit User</h2>
     <form action="#" th:action="@{/edit}" th:object="${user}" th:method="PATCH">
         <table border="1">
-            <tr>
-                <td><input type="hidden" th:field="*{id}" /></td>
-            </tr>
+
             <tr>
                 <td><label th:text="Name" /></td>
                 <td><input type="text" th:field="*{userName}" /></td>
@@ -37,6 +35,7 @@
                 <td><input type="submit" value="Edit" /></td>
             </tr>
         </table>
+        <h3><a href="/">Homepage</a></h3>
     </form>
 </div>
 </body>

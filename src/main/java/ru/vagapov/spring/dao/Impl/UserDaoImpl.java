@@ -48,30 +48,32 @@ public class UserDaoImpl implements UserDao {
     @Transactional(readOnly = true)
     @Override
     public UserEntity findUserByUserName(String userName) {
-        String jpql = "select u from UserEntity u where u.userName = :userName";
+        String jpql = "SELECT u FROM UserEntity u WHERE u.userName = :userName";
         Query query = entityManager.createQuery(jpql);
         query.setParameter("userName", userName);
         return (UserEntity) query.getSingleResult();
-//         можно сделать через критерию:
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
-//        Root<UserEntity> root = cq.from(UserEntity.class);
-//        cq.select(root);
-//        cq.where(cb.equal(root.get("userName"), userName));
-//        TypedQuery<UserEntity> query = entityManager.createQuery(cq);
-//        return query.getSingleResult();
+/*
+         можно сделать через критерию:
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> cq = cb.createQuery(UserEntity.class);
+        Root<UserEntity> root = cq.from(UserEntity.class);
+        cq.select(root);
+        cq.where(cb.equal(root.get("userName"), userName));
+        TypedQuery<UserEntity> query = entityManager.createQuery(cq);
+        return query.getSingleResult();
+*/
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UserEntity> findAll() {
-        return entityManager.createQuery("from UserEntity").getResultList();
+        return entityManager.createQuery("FROM UserEntity").getResultList();
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<UserEntity> findAllUsersByLastName(String lastName) {
-        String jpql = "select u from UserEntity u where u.lastName = :lastName";
+        String jpql = "SELECT u FROM UserEntity u WHERE u.lastName = :lastName";
         Query query = entityManager.createQuery(jpql);
         query.setParameter("lastName", lastName);
         return query.getResultList();

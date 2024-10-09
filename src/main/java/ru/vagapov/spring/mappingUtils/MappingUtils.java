@@ -1,4 +1,4 @@
-package ru.vagapov.spring.MappingUtils;
+package ru.vagapov.spring.mappingUtils;
 
 import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
