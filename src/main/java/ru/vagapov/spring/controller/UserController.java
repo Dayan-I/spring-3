@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.service.UserService;
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**

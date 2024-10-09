@@ -1,6 +1,8 @@
 plugins {
     id("java")
     id("war")
+    id("org.springframework.boot") version "3.3.4"
+    id ("io.spring.dependency-management") version "1.1.6"
 }
 
 group = "ru.vagapov.spring"
@@ -16,19 +18,14 @@ java {
 }
 
 dependencies {
-    implementation("org.springframework:spring-webmvc:5.3.14")
-    implementation("org.springframework:spring-orm:5.3.14")
-    implementation("org.hibernate:hibernate-core:5.6.3.Final")
-    implementation("org.hibernate:hibernate-entitymanager:5.6.3.Final")
-    implementation("org.postgresql:postgresql:42.3.1")
-    implementation("org.thymeleaf:thymeleaf-spring5:3.0.14.RELEASE")
-
+    implementation ("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.postgresql:postgresql")
     compileOnly("javax.servlet:javax.servlet-api:4.0.1")
 
-    testImplementation("org.springframework:spring-test:5.3.14")
-    testImplementation(platform("org.junit:junit-bom:5.11.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.test {
