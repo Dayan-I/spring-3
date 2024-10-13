@@ -8,8 +8,9 @@
 <body>
 <div align="center">
     <h2>Edit User</h2>
-    <form action="#" th:action="@{/edit}" th:object="${user}" th:method="PATCH">
+    <form action="#" th:action="@{/admin/edit}" th:object="${user}" th:method="PATCH">
         <table border="1">
+                <input type="hidden" th:field="*{id}" />
 
             <tr>
                 <td><label th:text="Name" /></td>
@@ -37,6 +38,7 @@
         </table>
         <h3><a href="/">Homepage</a></h3>
     </form>
+    <h3><a href="/logout">LogOut</a></h3>
 </div>
 </body>
 </html>

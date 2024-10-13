@@ -1,16 +1,17 @@
 package ru.vagapov.spring.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -74,8 +75,19 @@ public class UserEntity {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .map(roleEntity -> new SimpleGrantedAuthority(roleEntity.getAuthority()))
+                .collect(Collectors.toList());    }
+    @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
     }
 
     public void setPassword(String password) {
@@ -114,4 +126,10 @@ public class UserEntity {
                 ", age=" + age +
                 '}';
     }
+
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+                    joinColumns = @JoinColumn(name = "id"),
+                    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<RoleEntity> roles;
 }

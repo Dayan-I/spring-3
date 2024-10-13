@@ -1,6 +1,11 @@
 package ru.vagapov.spring.service.Impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dao.UserDao;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.entity.UserEntity;
@@ -10,12 +15,12 @@ import java.util.List;
 
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserDao userDao;
     private final MappingUtils mappingUtils;
 
-
+    @Autowired
     public UserServiceImpl(UserDao userDao, MappingUtils mappingUtils) {
         this.userDao = userDao;
         this.mappingUtils = mappingUtils;
@@ -61,5 +66,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUsersByPartOfNameOrLastName(String partOfName) {
         return mappingUtils.listOfUserEntityToListOfUserDto(userDao.findAllUsersByPartOfNameOrLastName(partOfName));
+    }
+
+    @Override
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity userEntity = userDao.findUserByUserName(username);
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(String.format("User %s not found", username));
+        }
+
+        return new org.springframework.security.core.userdetails.User(userEntity.getUsername(),
+                userEntity.getPassword(),
+                userEntity.getAuthorities());
     }
 }

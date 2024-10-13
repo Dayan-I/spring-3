@@ -23,6 +23,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    compileOnly("javax.servlet:javax.servlet-api:3.0.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
