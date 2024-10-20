@@ -8,7 +8,6 @@
 <body>
 <div align="center">
   <h2>Your user page</h2>
-  <h3><a href="/">Return</a></h3>
   <table border="1" cellpadding="5">
     <tr>
       <th>Id</th>
@@ -20,6 +19,12 @@
       <td><span th:text="${user.userName}"> Name </span></td>
       <td><span th:text="${user.lastName}"> LastName </span></td>
       <td><span th:text="${user.email}"> Email </span></td>
+    <td>
+    <form th:action="@{user/edituser}" th:method="get" >
+      <input type="hidden" name="id" th:value="${user.id}" />
+      <input type="submit" value="Edit" class="btn btn-danger" />
+    </form>
+    <td>
   </table>
   <h3><a href="/logout">LogOut</a></h3>
 </div>

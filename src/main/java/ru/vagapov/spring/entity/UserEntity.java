@@ -1,13 +1,11 @@
 package ru.vagapov.spring.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -32,15 +30,21 @@ public class UserEntity implements UserDetails {
     @Column(name = "age")
     private Integer age;
 
-    public UserEntity() {}
+    public void setRoles( Collection<RoleEntity> roles) {
+        this.roles = (Set<RoleEntity>) roles;
+    }
 
-    public UserEntity(Long id, String userName, String lastName, String email, String password, Integer age) {
+    public UserEntity() {
+    }
+
+    public UserEntity(Long id, String userName, String lastName, String email, String password, Integer age, Set<RoleEntity> roles) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.age = age;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -76,10 +80,10 @@ public class UserEntity implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(roleEntity -> new SimpleGrantedAuthority(roleEntity.getAuthority()))
-                .collect(Collectors.toList());    }
+    public Set<RoleEntity> getAuthorities() {
+        return roles;
+    }
+
     @Override
     public String getPassword() {
         return password;
@@ -127,9 +131,9 @@ public class UserEntity implements UserDetails {
                 '}';
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-                    joinColumns = @JoinColumn(name = "id"),
-                    inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<RoleEntity> roles;
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<RoleEntity> roles;
 }

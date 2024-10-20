@@ -29,15 +29,15 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping(value = "/search")
-    public String findUserByNameAndSurname(Model model, @RequestParam(name = "username") String username) {
-        List<User> users = userService.findAll();
-        users.removeIf(user -> !user.getUserName().toLowerCase().contains(username.toLowerCase()) && !user.getLastName().toLowerCase().contains(username.toLowerCase()));
-        model.addAttribute("users", users);
-        if (users.isEmpty()) {
-            return "redirect:/";
-        } else {
-            return "users";
-        }
+    @RequestMapping(value = "user/edituser", method = RequestMethod.GET)
+    public String editUser(Model model, @RequestParam(name = "id") String id) {
+        model.addAttribute("user", userService.findById(Long.parseLong(id)));
+        return "useredit";
+    }
+
+    @RequestMapping(value = "user/edit", method = RequestMethod.PATCH)
+    public String editUserBy(@ModelAttribute("user") User user) {
+        userService.updateUser(user, user.getId());
+        return "redirect:/";
     }
 }

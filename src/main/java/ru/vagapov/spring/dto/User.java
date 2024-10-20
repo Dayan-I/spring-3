@@ -1,6 +1,14 @@
 package ru.vagapov.spring.dto;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import ru.vagapov.spring.entity.RoleEntity;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * ДТО класс для сущности юзера, именно его отдаем по запросам
@@ -32,15 +40,27 @@ public class User {
      */
     private Integer age;
 
-    public User() {}
+    private List<String> roles;
 
-    public User(Long id, String userName, String lastName, String email, String password, Integer age) {
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public User() {
+    }
+
+    public User(Long id, String userName, String lastName, String email, String password, Integer age, List<String> roles) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.age = age;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -115,4 +135,6 @@ public class User {
                 ", age=" + age +
                 '}';
     }
-}
+
+    }
+

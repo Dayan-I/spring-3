@@ -4,10 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
+import ru.vagapov.spring.entity.RoleEntity;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.service.UserService;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Класс-контроллер, отвечает на запросы пользователей админов
