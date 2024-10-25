@@ -1,13 +1,16 @@
 package ru.vagapov.spring.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.vagapov.spring.dto.User;
+import ru.vagapov.spring.dto.UserForLogin;
+
 import java.util.List;
 
 /**
  * Сервисный слой, реализует методы DAO слоя
  */
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     /**
      * Создание нового юзера
      *
@@ -19,9 +22,9 @@ public interface UserService {
      * Обволение айди юзера
      *
      * @param user пользоветель у которого меняем айди
-     * @param id   новый айди
+     *
      */
-    void updateUser(User user, Long id);
+    void updateUser(User user);
 
     /**
      * Удаление пользователя из БД
@@ -68,4 +71,6 @@ public interface UserService {
      * @param partOfName что должны содержать имя или фамилия
      */
     List<User> findAllUsersByPartOfNameOrLastName(String partOfName);
+
+    UserForLogin findUserByUserNameForLogin(String name);
 }

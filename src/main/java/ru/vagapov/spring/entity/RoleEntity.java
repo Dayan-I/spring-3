@@ -1,12 +1,11 @@
 package ru.vagapov.spring.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-public class RoleEntity implements GrantedAuthority {
+public final class RoleEntity  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,15 +13,6 @@ public class RoleEntity implements GrantedAuthority {
 
     @Column
     private String name;
-
-    @Override
-    public String getAuthority() {
-        return getName();
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getId() {
         return id;
@@ -37,14 +27,6 @@ public class RoleEntity implements GrantedAuthority {
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "id"))
     private Set<UserEntity> users;
-
-    public void setUsers(Set<UserEntity> users) {
-        this.users = users;
-    }
-
-    public Set<UserEntity> getUsers() {
-        return users;
-    }
 
     @Override
     public String toString() {

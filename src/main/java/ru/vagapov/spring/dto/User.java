@@ -1,20 +1,12 @@
 package ru.vagapov.spring.dto;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import ru.vagapov.spring.entity.RoleEntity;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * ДТО класс для сущности юзера, именно его отдаем по запросам
  * пользователей и в userService
  */
-public class User {
+public class User  {
     /**
      * Уникальный айди
      */
@@ -39,12 +31,10 @@ public class User {
      * Возраст
      */
     private Integer age;
-
+    /**
+     * Список ролей пользователя
+     */
     private List<String> roles;
-
-    public List<String> getRoles() {
-        return roles;
-    }
 
     public void setRoles(List<String> roles) {
         this.roles = roles;
@@ -63,12 +53,16 @@ public class User {
         this.roles = roles;
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public String getUserName() {
         return userName;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getLastName() {
@@ -77,10 +71,6 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setId(Long id) {
@@ -127,14 +117,19 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", age=" + age +
-                '}';
+               "id=" + id +
+               ", userName='" + userName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", email='" + email + '\'' +
+               ", password='" + password + '\'' +
+               ", age=" + age +
+               '}';
     }
 
+
+    public String getPassword() {
+        return password;
     }
+
+}
 

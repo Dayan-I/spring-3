@@ -1,15 +1,13 @@
 package ru.vagapov.spring.entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class UserEntity implements UserDetails {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +28,15 @@ public class UserEntity implements UserDetails {
     @Column(name = "age")
     private Integer age;
 
-    public void setRoles( Collection<RoleEntity> roles) {
+    public String getPassword() {
+        return password;
+    }
+
+    public Set<RoleEntity> getRoles() {
+        return this.roles;
+    }
+
+    public void setRoles(Collection<RoleEntity> roles) {
         this.roles = (Set<RoleEntity>) roles;
     }
 
@@ -56,7 +62,7 @@ public class UserEntity implements UserDetails {
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
@@ -77,21 +83,6 @@ public class UserEntity implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public Set<RoleEntity> getAuthorities() {
-        return roles;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return userName;
     }
 
     public void setPassword(String password) {
@@ -131,7 +122,7 @@ public class UserEntity implements UserDetails {
                 '}';
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

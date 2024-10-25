@@ -7,11 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.service.UserService;
-import java.util.List;
 
 /**
  * Класс-контроллер, отвечает на запросы пользователей, обычных юзеров
  */
+@RequestMapping("/user")
 @Controller
 public class UserController {
 
@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("")
     public String user(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -29,15 +29,15 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping(value = "user/edituser", method = RequestMethod.GET)
+    @RequestMapping(value = "/edituser", method = RequestMethod.GET)
     public String editUser(Model model, @RequestParam(name = "id") String id) {
         model.addAttribute("user", userService.findById(Long.parseLong(id)));
         return "useredit";
     }
 
-    @RequestMapping(value = "user/edit", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/edit", method = RequestMethod.PATCH)
     public String editUserBy(@ModelAttribute("user") User user) {
-        userService.updateUser(user, user.getId());
+        userService.updateUser(user);
         return "redirect:/";
     }
 }

@@ -10,7 +10,7 @@
 <div align="center">
     <h2>Users</h2>
     <h3>Search by Name and Lastname</h3>
-    <form method="get" action="/" >
+    <form method="get" action="/admin" >
         <input type="text" th:name="username" th:value="${username}"/>
         <input type="submit" value="Search"></input>
     </form>
@@ -24,12 +24,12 @@
             <th>Age</th>
         </tr>
 
-        <tr th:if="${users!= null && users.isEmpty()}">
+        <tr th:if="${users.isEmpty()}">
             <td colspan="5"> No Users Available </td>
         </tr>
         <tr th:each="user : ${users}">
             <td><span th:text="${user.id}"> Id </span></td>
-            <td><span th:text="${user.getUserName}"> Name </span></td>
+            <td><span th:text="${user.getUserName()}"> Name </span></td>
             <td><span th:text="${user.getLastName()}"> LastName </span></td>
             <td><span th:text="${user.getEmail()}"> Email </span></td>
             <td><span th:text="${user.getAge()}"> Age </span></td>
@@ -45,9 +45,10 @@
             </td>
         </tr>
     </table>
-    <h3><a href="/">Homepage</a></h3>
     <h3><a href="/logout">LogOut</a></h3>
     <h3><a href="/user">userPage</a></h3>
+    <h3><a href="/admin">HomePage</a></h3>
+
 </div>
 </body>
 </html>
