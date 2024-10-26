@@ -72,5 +72,4 @@ public interface UserService extends UserDetailsService {
      */
     List<User> findAllUsersByPartOfNameOrLastName(String partOfName);
 
-    UserForLogin findUserByUserNameForLogin(String name);
 }

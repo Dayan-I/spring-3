@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String user(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -38,6 +38,6 @@ public class UserController {
     @RequestMapping(value = "/edit", method = RequestMethod.PATCH)
     public String editUserBy(@ModelAttribute("user") User user) {
         userService.updateUser(user);
-        return "redirect:/";
+        return "redirect:/user";
     }
 }

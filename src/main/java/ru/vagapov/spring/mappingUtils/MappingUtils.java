@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.dto.UserForLogin;
 import ru.vagapov.spring.entity.UserEntity;
+import ru.vagapov.spring.service.impl.UserRolesService;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class MappingUtils {
 
     private final PasswordEncoder passwordEncoder;
+    private final UserRolesService userRolesService;
 
 
-    public MappingUtils(PasswordEncoder passwordEncoder) {
+    public MappingUtils(PasswordEncoder passwordEncoder, UserRolesService userRolesService) {
         this.passwordEncoder = passwordEncoder;
+        this.userRolesService = userRolesService;
     }
 
     public User userEntityToUserDto(Optional<UserEntity> userEntity) {
@@ -29,6 +33,7 @@ public class MappingUtils {
         user.setPassword(userEntity.orElseThrow().getPassword());
         user.setEmail(userEntity.orElseThrow().getEmail());
         user.setLastName(userEntity.orElseThrow().getLastName());
+        user.setRoles(userRolesService.roleOfEntityToRoleDto(userEntity.get().getRoles()));
         return user;
     }
 
@@ -40,6 +45,7 @@ public class MappingUtils {
         userEntity.setPassword((user.getPassword()));
         userEntity.setEmail(user.getEmail());
         userEntity.setLastName(user.getLastName());
+        userEntity.setRoles(userRolesService.roleOfDtoToRoleEntity(user.getRoles()));
         return userEntity;
     }
 

@@ -7,8 +7,15 @@ import org.springframework.security.core.GrantedAuthority;
  *
  */
 public class Role implements GrantedAuthority {
-
+    /**
+     * Уникальный айди для роли
+     *
+     */
     private Long id;
+    /**
+     * Название роли
+     *
+     */
     private String name;
 
     public String getName() {

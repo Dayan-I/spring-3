@@ -6,11 +6,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.dto.UserForLogin;
+import ru.vagapov.spring.entity.RoleEntity;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.mappingUtils.MappingUtils;
 import ru.vagapov.spring.service.UserService;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import ru.vagapov.spring.repository.UserDaoJPARepository;
 
 
@@ -30,15 +34,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(User user) {
         UserEntity userEntity = mappingUtils.userDtoToUserEntity(user);
-        userEntity.setRoles(userRolesService.roleOfDtoToRoleEntity(user.getRoles()));
         userDaoJPARepository.save(userEntity);
     }
 
     @Override
     public void updateUser(User user) {
         UserEntity userEntity = mappingUtils.userDtoToUserEntity(user);
-        List<String > userRole = user.getRoles();
-        userEntity.setRoles(userRolesService.roleOfDtoToRoleEntity(userRole));
         userDaoJPARepository.save(userEntity);
     }
 
@@ -49,53 +50,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Long id) {
-       User user = mappingUtils.userEntityToUserDto(userDaoJPARepository.findById(id));
-       user.setRoles(userRolesService.roleOfEntityToRoleDto(userDaoJPARepository.findById(id).get().getRoles()));
-       return user;
-    }
-
-    @Override
-    public User findUserByUserName(String userName) {
-        UserEntity userEntity = userDaoJPARepository.findByUserName(userName);
-        User user= mappingUtils.userEntityToUserDto(Optional.ofNullable(userEntity));
-        user.setRoles(userRolesService.roleOfEntityToRoleDto(userDaoJPARepository.findUserRoles(user.getId())));
+        User user = mappingUtils.userEntityToUserDto(userDaoJPARepository.findById(id));
+        user.setRoles(userRolesService.roleOfEntityToRoleDto(userDaoJPARepository.findById(id).get().getRoles()));
         return user;
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public User findUserByUserName(String userName) {
+        UserEntity userEntity = userDaoJPARepository.findByUserName(userName);
+        return mappingUtils.userEntityToUserDto(Optional.ofNullable(userEntity));
+    }
+
+    @Override
     public List<User> findAll() {
-       List<User> users = mappingUtils.listOfUserEntityToListOfUserDto(userDaoJPARepository.findAll());
-       for (User user : users) {
-           user.setRoles(userRolesService.roleOfEntityToRoleDto(userDaoJPARepository.findById(user.getId()).get().getRoles()));
-       }
-       return users;
+        return mappingUtils.listOfUserEntityToListOfUserDto(userDaoJPARepository.findAllUsersWithRoles());
     }
 
     @Override
     public List<User> findAllUsersByLastName(String lastName) {
         List<User> users = mappingUtils.listOfUserEntityToListOfUserDto(userDaoJPARepository.findAllByLastName(lastName));
-        for (User user : users) {
-            user.setRoles(userRolesService.roleOfEntityToRoleDto(userDaoJPARepository.findById(user.getId()).get().getRoles()));
-        }
         return users;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAllUsersByPartOfNameOrLastName(String partOfName) {
         List<User> users = mappingUtils.listOfUserEntityToListOfUserDto(userDaoJPARepository.findAllUsersByPartOfNameOrLastName(partOfName));
-        for (User user : users) {
-            user.setRoles(userRolesService.roleOfEntityToRoleDto(userDaoJPARepository.findById(user.getId()).get().getRoles()));
-        }
         return users;
     }
 
-    @Override
-    public UserForLogin findUserByUserNameForLogin(String name) {
-        UserEntity userEntity = userDaoJPARepository.findByUserName(name);
-        UserForLogin user = mappingUtils.userDtoToUserEntityLogin(userEntity);
-        user.setAuthorities(userRolesService.roleOfEntityToRoleDtoForLogin(userEntity.getRoles()));
-        return user;
-    }
 
     @Override
     @Transactional
@@ -104,6 +88,13 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User %s not found", username));
         }
+        return user;
+    }
+
+    private UserForLogin findUserByUserNameForLogin(String name) {
+        UserEntity userEntity = userDaoJPARepository.findByUserName(name);
+        UserForLogin user = mappingUtils.userDtoToUserEntityLogin(userEntity);
+        user.setAuthorities(userRolesService.roleOfEntityToRoleDtoForLogin(userEntity.getRoles()));
         return user;
     }
 }

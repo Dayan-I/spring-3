@@ -1,6 +1,7 @@
 package ru.vagapov.spring.entity;
 
 import jakarta.persistence.*;
+
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -36,8 +37,8 @@ public class UserEntity {
         return this.roles;
     }
 
-    public void setRoles(Collection<RoleEntity> roles) {
-        this.roles = (Set<RoleEntity>) roles;
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     public UserEntity() {
@@ -62,7 +63,7 @@ public class UserEntity {
     }
 
     public String getUserName() {
-        return this.userName;
+        return userName;
     }
 
     public void setUserName(String userName) {
@@ -113,16 +114,16 @@ public class UserEntity {
     @Override
     public String toString() {
         return "UserEntity{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", age=" + age +
-                '}';
+               "id=" + id +
+               ", userName='" + userName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", email='" + email + '\'' +
+               ", password='" + password + '\'' +
+               ", age=" + age +
+               '}';
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

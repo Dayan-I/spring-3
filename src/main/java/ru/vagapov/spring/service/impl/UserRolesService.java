@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.vagapov.spring.dto.Role;
 import ru.vagapov.spring.entity.RoleEntity;
 import ru.vagapov.spring.repository.RoleJPARepository;
+
 import java.util.*;
 
 /**
@@ -17,7 +18,7 @@ public class UserRolesService {
         this.roleJPARepository = roleJPARepository;
     }
 
-    public Set <RoleEntity> roleOfDtoToRoleEntity(List<String> dtoRoles){
+    public Set<RoleEntity> roleOfDtoToRoleEntity(List<String> dtoRoles) {
         Set<RoleEntity> entitiesRoles = new HashSet<>();
         for (String role : dtoRoles) {
             if (role.equals("ROLE_ADMIN")) {
@@ -29,7 +30,7 @@ public class UserRolesService {
         return entitiesRoles;
     }
 
-    public List<String> roleOfEntityToRoleDto(Set<RoleEntity> entitiesRoles){
+    public List<String> roleOfEntityToRoleDto(Set<RoleEntity> entitiesRoles) {
         List<String> dtoRoles = new ArrayList<>();
         for (RoleEntity role : entitiesRoles) {
             if (role.getName().equals("ROLE_ADMIN")) {
@@ -40,7 +41,8 @@ public class UserRolesService {
         }
         return dtoRoles;
     }
-    public Set<Role> roleOfEntityToRoleDtoForLogin(Set<RoleEntity> entitiesRoles){
+
+    public Set<Role> roleOfEntityToRoleDtoForLogin(Set<RoleEntity> entitiesRoles) {
         Set<Role> dtoRoles = new HashSet<>();
         for (RoleEntity role : entitiesRoles) {
             if (role.getName().equals("ROLE_ADMIN")) {
@@ -58,15 +60,15 @@ public class UserRolesService {
         return dtoRoles;
     }
 
-    public Set<Role> findAllRoles(){
-       List<RoleEntity> roles = roleJPARepository.findAll();
-       Set<Role> dtoRoles = new HashSet<>();
-       for (RoleEntity role : roles) {
-           Role roleOfUser = new Role();
-           roleOfUser.setId(role.getId());
-           roleOfUser.setName(role.getName());
-           dtoRoles.add(roleOfUser);
-       }
-       return dtoRoles;
+    public Set<Role> findAllRoles() {
+        List<RoleEntity> roles = roleJPARepository.findAll();
+        Set<Role> dtoRoles = new HashSet<>();
+        for (RoleEntity role : roles) {
+            Role roleOfUser = new Role();
+            roleOfUser.setId(role.getId());
+            roleOfUser.setName(role.getName());
+            dtoRoles.add(roleOfUser);
+        }
+        return dtoRoles;
     }
 }

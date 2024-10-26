@@ -7,6 +7,7 @@ import ru.vagapov.spring.dto.Role;
 import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.service.UserService;
 import ru.vagapov.spring.service.impl.UserRolesService;
+
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +26,7 @@ public class AdminController {
         this.userRolesService = userRolesService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String home(Model model, @RequestParam(name = "username", required = false) String username) {
         List<User> users;
         if (username != null) {
@@ -61,7 +62,7 @@ public class AdminController {
         User user = userService.findById(Long.parseLong(id));
         Set<Role> selectableRoles = userRolesService.findAllRoles();
         model.addAttribute("user", user);
-        model.addAttribute("roles",selectableRoles);
+        model.addAttribute("roles", selectableRoles);
         return "edit";
     }
 

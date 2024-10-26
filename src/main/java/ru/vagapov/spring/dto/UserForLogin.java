@@ -6,8 +6,17 @@ import java.util.Set;
  * ДТО класс для сущности юзера для авторизации
  */
 public class UserForLogin implements UserDetails {
+    /**
+     * Имя пользователя для авторизации
+     */
     private String username;
+    /**
+     * Пароль пользователя для авторизации
+     */
     private String password;
+    /**
+     * Роли пользователя для авторизации
+     */
     private Set<Role> authorities;
 
     public void setUsername(String username) {

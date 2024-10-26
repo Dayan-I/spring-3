@@ -6,7 +6,7 @@ import java.util.*;
  * ДТО класс для сущности юзера, именно его отдаем по запросам
  * пользователей и в userService
  */
-public class User  {
+public class User {
     /**
      * Уникальный айди
      */
@@ -32,13 +32,9 @@ public class User  {
      */
     private Integer age;
     /**
-     * Список ролей пользователя
+     * Список названий ролей пользователя
      */
     private List<String> roles;
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
 
     public User() {
     }
@@ -59,6 +55,10 @@ public class User  {
 
     public List<String> getRoles() {
         return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -93,6 +93,10 @@ public class User  {
         this.password = password;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public Integer getAge() {
         return age;
     }
@@ -122,14 +126,17 @@ public class User  {
                ", lastName='" + lastName + '\'' +
                ", email='" + email + '\'' +
                ", password='" + password + '\'' +
-               ", age=" + age +
+               ", age=" + age + '\'' +
+               ", roles=" + roles +
                '}';
     }
 
-
-    public String getPassword() {
-        return password;
+    public String RolesAsString() {
+        StringBuilder sb = new StringBuilder();
+        for (String role : roles) {
+            sb.append(role.replace("ROLE_", ""));
+        }
+        return sb.toString();
     }
-
 }
 
