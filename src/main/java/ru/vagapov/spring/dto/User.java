@@ -35,11 +35,15 @@ public class User {
      * Список названий ролей пользователя
      */
     private List<String> roles;
+    /**
+     * Список книг пользователя
+     */
+    private List<Long> books;
 
     public User() {
     }
 
-    public User(Long id, String userName, String lastName, String email, String password, Integer age, List<String> roles) {
+    public User(Long id, String userName, String lastName, String email, String password, Integer age, List<String> roles, List<Long> books) {
         this.id = id;
         this.userName = userName;
         this.lastName = lastName;
@@ -47,6 +51,7 @@ public class User {
         this.password = password;
         this.age = age;
         this.roles = roles;
+        this.books = books;
     }
 
     public String getUserName() {
@@ -105,6 +110,14 @@ public class User {
         this.age = age;
     }
 
+    public List<Long> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Long> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -130,7 +143,6 @@ public class User {
                ", roles=" + roles +
                '}';
     }
-
     public String RolesAsString() {
         StringBuilder sb = new StringBuilder();
         for (String role : roles) {
@@ -138,5 +150,6 @@ public class User {
         }
         return sb.toString();
     }
+
 }
 

@@ -3,12 +3,9 @@ package ru.vagapov.spring.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import ru.vagapov.spring.entity.RoleEntity;
 import ru.vagapov.spring.entity.UserEntity;
-
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * JPA Интерфейс для взаимодействия с БД
@@ -27,6 +24,10 @@ public interface UserDaoJPARepository extends JpaRepository<UserEntity, Long> {
 
     @Query("SELECT u FROM UserEntity u join fetch u.roles")
     List<UserEntity> findAllUsersWithRoles();
+
+    @Query("SELECT u FROM UserEntity u join u.books b where b.id = :id")
+    List<UserEntity> findAllUsersWithBook(Long id);
+
 }
 
 

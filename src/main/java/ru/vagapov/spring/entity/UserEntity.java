@@ -34,7 +34,7 @@ public class UserEntity {
     }
 
     public Set<RoleEntity> getRoles() {
-        return this.roles;
+        return roles;
     }
 
     public void setRoles(Set<RoleEntity> roles) {
@@ -98,6 +98,14 @@ public class UserEntity {
         this.age = age;
     }
 
+    public Set<BookEntity> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<BookEntity> books) {
+        this.books = books;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,4 +136,12 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleEntity> roles;
+
+    @ManyToMany
+    @JoinTable(name = "users_books",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private Set<BookEntity> books;
+
+
 }

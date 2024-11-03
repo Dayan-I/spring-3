@@ -24,6 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
     compileOnly("javax.servlet:javax.servlet-api:3.0.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

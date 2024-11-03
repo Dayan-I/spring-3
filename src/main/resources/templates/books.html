@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div align="center">
+    <h2>Books</h2>
+    <h3>Search by Name and Lastname</h3>
+    <form method="get" action="/books" >
+        <input type="text" th:name="bookname" th:value="${bookname}"/>
+        <input type="submit" value="Search"></input>
+    </form>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Amount</th>
+        </tr>
+
+        <tr th:if="${books.isEmpty()}">
+            <td colspan="5"> No Users Available </td>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td><span th:text="${book.id}"> Id </span></td>
+            <td><span th:text="${book.getTitle()}"> Title </span></td>
+            <td><span th:text="${book.getAuthor()}"> Author </span></td>
+            <td><span th:text="${book.getAmount()}"> Amount </span></td>
+            <td>
+                <form th:action="@{books/users}" th:method="get" >
+                    <input type="hidden" name="id" th:value="${book.id}" />
+                    <input type="submit" value="Show users with that book" class="btn btn-danger" />
+                </form>
+            </td>
+    </table>
+    <h3><a href="/logout">LogOut</a></h3>
+    <h3><a href="/user">userPage</a></h3>
+    <h3><a href="/admin">HomePage</a></h3>
+
+</div>
+</body>
+</html>

@@ -6,9 +6,10 @@ import ru.vagapov.spring.dto.User;
 import ru.vagapov.spring.dto.UserForLogin;
 import ru.vagapov.spring.entity.UserEntity;
 import ru.vagapov.spring.service.impl.UserRolesService;
-
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Маппер для превращения UserEntity в UserDto и наоборот
@@ -18,11 +19,14 @@ public class MappingUtils {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRolesService userRolesService;
+    private final BookMapper bookMapper;
 
 
-    public MappingUtils(PasswordEncoder passwordEncoder, UserRolesService userRolesService) {
+
+    public MappingUtils(PasswordEncoder passwordEncoder, UserRolesService userRolesService, BookMapper bookMapper) {
         this.passwordEncoder = passwordEncoder;
         this.userRolesService = userRolesService;
+        this.bookMapper = bookMapper;
     }
 
     public User userEntityToUserDto(Optional<UserEntity> userEntity) {
@@ -34,6 +38,7 @@ public class MappingUtils {
         user.setEmail(userEntity.orElseThrow().getEmail());
         user.setLastName(userEntity.orElseThrow().getLastName());
         user.setRoles(userRolesService.roleOfEntityToRoleDto(userEntity.get().getRoles()));
+        user.setBooks(bookMapper.setOfBookEntityToBooksDto(userEntity.get().getBooks()));
         return user;
     }
 
@@ -46,6 +51,7 @@ public class MappingUtils {
         userEntity.setEmail(user.getEmail());
         userEntity.setLastName(user.getLastName());
         userEntity.setRoles(userRolesService.roleOfDtoToRoleEntity(user.getRoles()));
+
         return userEntity;
     }
 
@@ -60,5 +66,9 @@ public class MappingUtils {
     public List<User> listOfUserEntityToListOfUserDto(List<UserEntity> userEntityList) {
         return userEntityList.stream().map(userEntity -> userEntityToUserDto(Optional.ofNullable(userEntity))).toList();
 
+    }
+
+    public Set<UserEntity> listOfUserDtoToSetOfUserEntity(List<User> userDtoList) {
+        return userDtoList.stream().map(this::userDtoToUserEntity).collect(Collectors.toSet());
     }
 }

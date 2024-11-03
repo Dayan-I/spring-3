@@ -72,4 +72,5 @@ public interface UserService extends UserDetailsService {
      */
     List<User> findAllUsersByPartOfNameOrLastName(String partOfName);
 
+    List<User> findAllUsersByBookId(Long bookId);
 }

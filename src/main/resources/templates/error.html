@@ -3,34 +3,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Users</title>
+  <title>You already have this book</title>
   <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=rQGUCKUCrAoq8UHJZToDVVHf6x7cCaHILnOpphZR2eHcoKwkqHKy1c1HnlzTt3Pev5yxj3qMLplkCiHQ5OBR_rYljMgThAgV8WMFG2dMNVcvCKO7DpPFsAfwdnFt5a_BiM55IqQ37fXpvgFH69DfBpyIeyet7K02i5GW-9t8iWjbR-NYaCq0U8OYSFq7k0lxkV9vDNU8GZ4pzb3wNxkaM5IYLGiBFjHLcD8Ca-Z2lW4GVSSBKzogda7EtqnMZjkObfNT3zaC-HnwU8aJ85iKHjedzpg9ltFN3RI1socbOmBuWN2mrALwv-wAB5nYPEksvtd0ArSgWf-E2EwFUTjBipt8kb4dUfyamHf5GlHYfbPxJdBz36iK3VBhcGrXl21DlLX5nFJpD9tHVSRHRgvhWmBdrEL_PfIvBOXDYe6guqlcsaJpfYTofEWtXd1GEwbDAz3mE-4_oHgBMLJKvJlQM4YmO7vrTN5JvvRtL7Ky8UrJNum_3d14ATFmSZ8ND2uBytROogMfpAhQ12cmLt54CgVFxeND_vKtni88FfWDk_Up7K-j4mF2XiPZd-Q070bNouA8Y9P4Y-IstaCtwW24Voo-DPTsTU6lMSPC4Vpp47q1Oad3-EOw5_Js80xxud51sCnUMQCuO03zqJO0VJjmFeTZG7IrPKFy518nY1lQd0DWeui0poO9FFGUh0QyZKHLviHwuwapX3XO_ZUiQ1mPx9dsrLMepE868CSIVLEWi_0wOaUzF-TON-oX_zWqdVBeTrzmbGz7W9HcpO2iDtEa55ztkAm2HKR1zr9mMC8JLg0zLkY1ZIfhaFj0EOHFAXsz1xwmMRodmJRrnBpMyNarw1c9wACC0SUBcaF7uGePJqTU_BZ5VEZqkU606hft2Y5WYMI8ujvLeOnAI7sSszbOs9DldmrVQroVswyEvrwAbDGd42cWrc6EVV5ihFg5FrvPzUwVYCMRqTUxDl4o2LiCLKuhVhBLmM8imj3ptujNAPRFOo4lVM7k4dSgWXIc1CFdWXVxm-BB-xyRLI7JZ9gn2G1JZCqeNWOhJ9hM-H6JAyf3YB6bK321d9sw2WcuB0afL5YJcyPXi_-fYi9YpmSjJ2eO5d_skdgdBVP_ZOtrFBr-O5Nn0WMZ5j243MG18S_OQlM_hCTW5NoGAx56Qp9ABIUlvy75y9qvjTrKyJMdMezk6a59BECGoLClxcWjPxmcV8Vd1vVf_uzVLVSKHSJHfw" charset="UTF-8"></script></head>
 <body>
 <div align="center">
-  <h2>Your user page</h2>
-  <table border="1" cellpadding="5">
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>LastName</th>
-      <th>E-mail</th>
-    </tr>
-      <td><span th:text="${user.id}"> Id </span></td>
-      <td><span th:text="${user.userName}"> Name </span></td>
-      <td><span th:text="${user.lastName}"> LastName </span></td>
-      <td><span th:text="${user.email}"> Email </span></td>
-    <td>
-    <form th:action="@{user/edituser}" th:method="get" >
-      <input type="hidden" name="id" th:value="${user.id}" />
-      <input type="submit" value="Edit" class="btn btn-danger" />
-    </form>
-      <form th:action="@{books/rent_book}" th:method="get" >
-        <input type="hidden" name="id" th:value="${user.id}" />
-        <input type="submit" value="Rent book" class="btn btn-danger" />
-      </form>
-    <td>
-  </table>
-  <h3><a href="/logout">LogOut</a></h3>
+  You already have this book
 </div>
 </body>
 </html>
